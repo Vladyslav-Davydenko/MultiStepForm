@@ -2,8 +2,6 @@ import AddOnsForm from "../forms/AddOnsForm";
 import InfoForm from "../forms/InfoForm";
 import PlanForm from "../forms/PlanForm";
 import Summary from "../forms/Summary";
-
-import NextButton from "../../components/button/NextButton";
 import GoBackButton from "../../components/button/GoBackButton";
 
 import {
@@ -34,17 +32,13 @@ export default function MainForm({
         <AddOnsForm />
         <div className="flex justify-between">
           <GoBackButton onSwitchPanel={() => handleNavigate(PLAN_ROUTE)} />
-          <NextButton onSwitchPanel={() => handleNavigate(SUMMARY_ROUTE)} />
         </div>
       </>
     );
   } else if (activePanel === INFO_ROUTE) {
     content = (
       <>
-        <InfoForm />
-        <div className="flex justify-end">
-          <NextButton onSwitchPanel={() => handleNavigate(PLAN_ROUTE)} />
-        </div>
+        <InfoForm onNextPanel={() => handleNavigate(PLAN_ROUTE)} />
       </>
     );
   } else if (activePanel === PLAN_ROUTE) {
@@ -53,7 +47,6 @@ export default function MainForm({
         <PlanForm />
         <div className="flex justify-between">
           <GoBackButton onSwitchPanel={() => handleNavigate(INFO_ROUTE)} />
-          <NextButton onSwitchPanel={() => handleNavigate(ADD_ONS_ROUTE)} />
         </div>
       </>
     );
@@ -69,7 +62,9 @@ export default function MainForm({
   }
   return (
     <>
-      <div className="flex m-7 justify-between flex-col w-full">{content}</div>
+      <div className="flex justify-between flex-col w-full px-20 pb-7 pt-10">
+        {content}
+      </div>
     </>
   );
 }

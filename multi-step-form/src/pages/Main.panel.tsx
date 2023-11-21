@@ -8,7 +8,7 @@ import { INFO_ROUTE } from "../variables/Routes";
 function MainPanel() {
   const [activePanel, setActivePanel] = useState<string>(INFO_ROUTE);
   return (
-    <div className="flex h-[700px] w-[1200px] bg-white rounded-xl">
+    <div className="flex h-[650px] w-[55%] bg-white rounded-md">
       <NavBar activePanel={activePanel} navigateTo={setActivePanel} />
       <MainForm activePanel={activePanel} navigateTo={setActivePanel} />
     </div>

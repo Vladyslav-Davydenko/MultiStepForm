@@ -17,22 +17,25 @@ export default function NavBar({
   navigateTo,
 }: Props): JSX.Element {
   return (
-    <nav className="bg-blue-600 h-[92%] w-[30%] m-7 rounded-xl p-7">
-      <div className="text-blue-50 flex flex-col gap-5">
+    <nav className="bg-blue-600 h-[95%] w-[38%] m-4 rounded-md p-7 bg-desktop-sidebar bg-cover bg-center">
+      <div className="text-blue-50 flex flex-col gap-10">
         <div
           className="flex gap-4 items-center hover:text-white hover:cursor-pointer transition-all"
           onClick={() => navigateTo(INFO_ROUTE)}
         >
           <div
             className={clsx({
-              "w-10 h-10 rounded-full border-blue-200 border flex justify-center items-center transition-all duration-300":
+              "w-9 h-9 rounded-full border-blue-200 border flex justify-center items-center transition-all duration-300":
                 true,
               "bg-blue-200 text-black": activePanel === INFO_ROUTE,
             })}
           >
             1
           </div>
-          <p>Info Step</p>
+          <div className="text-sm uppercase leading-5">
+            <p className="text-gray-300 text-xs">Step 1</p>
+            <p className="font-semibold tracking-wider">Your Info</p>
+          </div>
         </div>
         <div
           className="flex gap-4 items-center hover:text-white hover:cursor-pointer"
@@ -40,14 +43,17 @@ export default function NavBar({
         >
           <div
             className={clsx({
-              "w-10 h-10 rounded-full border-blue-200 border flex justify-center items-center transition-all duration-300":
+              "w-9 h-9 rounded-full border-blue-200 border flex justify-center items-center transition-all duration-300":
                 true,
               "bg-blue-200 text-black": activePanel === PLAN_ROUTE,
             })}
           >
             2
           </div>
-          <p>Plan Step</p>
+          <div className="text-sm uppercase leading-5">
+            <p className="text-gray-300 text-xs">Step 2</p>
+            <p className="font-semibold tracking-wider">Select Plan</p>
+          </div>
         </div>
         <div
           className="flex gap-4 items-center hover:text-white hover:cursor-pointer"
@@ -55,14 +61,17 @@ export default function NavBar({
         >
           <div
             className={clsx({
-              "w-10 h-10 rounded-full border-blue-200 border flex justify-center items-center transition-all duration-300":
+              "w-9 h-9 rounded-full border-blue-200 border flex justify-center items-center transition-all duration-300":
                 true,
               "bg-blue-200 text-black": activePanel === ADD_ONS_ROUTE,
             })}
           >
             3
           </div>
-          <p>Add-ons Step</p>
+          <div className="text-sm uppercase leading-5">
+            <p className="text-gray-300 text-xs">Step 3</p>
+            <p className="font-semibold tracking-wider">Add-ons</p>
+          </div>
         </div>
         <div
           className="flex gap-4 items-center hover:text-white hover:cursor-pointer"
@@ -70,14 +79,17 @@ export default function NavBar({
         >
           <div
             className={clsx({
-              "w-10 h-10 rounded-full border-blue-200 border flex justify-center items-center transition-all duration-300":
+              "w-9 h-9 rounded-full border-blue-200 border flex justify-center items-center transition-all duration-300":
                 true,
               "bg-blue-200 text-black": activePanel === SUMMARY_ROUTE,
             })}
           >
             4
           </div>
-          <p>Summary Step</p>
+          <div className="text-sm uppercase leading-5">
+            <p className="text-gray-300 text-xs">Step 4</p>
+            <p className="font-semibold tracking-wider">Summary</p>
+          </div>
         </div>
       </div>
     </nav>
