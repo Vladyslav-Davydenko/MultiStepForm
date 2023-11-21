@@ -13,11 +13,13 @@ export default function PlanForm(): JSX.Element {
       </div>
       <div className="flex justify-between">
         <div
-          className={clsx({
-            "h-[200px] w-40 rounded-lg border border-gray-300 hover:border-blue-950 bg-arcade-plan bg-no-repeat bg-[1rem_1.5rem] flex items-end":
-              true,
-            "bg-blue-50 border-blue-950": plan === "Arcade",
-          })}
+          className={clsx(
+            "h-[200px] w-40 rounded-lg border hover:border-blue-950 bg-arcade-plan bg-no-repeat bg-[1rem_1.5rem] flex items-end",
+            {
+              "border-gray-300": plan !== "Arcade",
+              "border-blue-950 bg-blue-50": plan === "Arcade",
+            }
+          )}
           onClick={() => setPlan("Arcade")}
         >
           <div className="text-sm p-4">
@@ -26,11 +28,13 @@ export default function PlanForm(): JSX.Element {
           </div>
         </div>
         <div
-          className={clsx({
-            "w-40  h-[200px] rounded-lg border border-gray-300 hover:border-blue-950 bg-advanced-plan bg-no-repeat bg-[1rem_1.5rem] flex items-end":
-              true,
-            "bg-blue-50 border-blue-950": plan === "Advanced",
-          })}
+          className={clsx(
+            "h-[200px] w-40 rounded-lg border hover:border-blue-950 bg-advanced-plan bg-no-repeat bg-[1rem_1.5rem] flex items-end",
+            {
+              "border-gray-300": plan !== "Advanced",
+              "border-blue-950 bg-blue-50": plan === "Advanced",
+            }
+          )}
           onClick={() => setPlan("Advanced")}
         >
           <div className="text-sm p-4">
@@ -39,11 +43,13 @@ export default function PlanForm(): JSX.Element {
           </div>
         </div>
         <div
-          className={clsx({
-            "w-40 h-[200px] rounded-lg border border-gray-300 hover:border-blue-950 bg-pro-plan bg-no-repeat bg-[1rem_1.5rem] flex items-end":
-              true,
-            "bg-blue-50 border-blue-950": plan === "Pro",
-          })}
+          className={clsx(
+            "h-[200px] w-40 rounded-lg border hover:border-blue-950 bg-pro-plan bg-no-repeat bg-[1rem_1.5rem] flex items-end",
+            {
+              "border-gray-300": plan !== "Pro",
+              "border-blue-950 bg-blue-50": plan === "Pro",
+            }
+          )}
           onClick={() => setPlan("Pro")}
         >
           <div className="text-sm p-4">
