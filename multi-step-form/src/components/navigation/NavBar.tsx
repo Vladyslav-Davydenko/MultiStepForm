@@ -17,7 +17,7 @@ export default function NavBar({
   navigateTo,
 }: Props): JSX.Element {
   return (
-    <nav className="bg-blue-600 h-[95%] w-[38%] m-4 rounded-md p-7 bg-desktop-sidebar bg-cover bg-center">
+    <nav className="bg-blue-600 h-[95%] w-[40%] m-4 rounded-md p-7 bg-desktop-sidebar bg-cover bg-center">
       <div className="text-blue-50 flex flex-col gap-10">
         <div
           className="flex gap-4 items-center hover:text-white hover:cursor-pointer transition-all"

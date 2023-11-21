@@ -27,7 +27,7 @@ export default function InfoForm({ onNextPanel }: Props): JSX.Element {
             type="text"
             placeholder="Your Name"
             id="input-name"
-            className="p-3 rounded-lg border border-gray-300 outline-blue-800 font-medium"
+            className="p-3 rounded-lg border border-gray-300 outline-blue-800 font-medium placeholder:font-normal"
             spellCheck="false"
           />
         </div>
@@ -39,7 +39,7 @@ export default function InfoForm({ onNextPanel }: Props): JSX.Element {
             type="email"
             placeholder="Your Email"
             id="input-email"
-            className="p-3 rounded-lg border border-gray-300 outline-blue-800 font-medium "
+            className="p-3 rounded-lg border border-gray-300 outline-blue-800 font-medium placeholder:font-normal"
             spellCheck="false"
           />
         </div>
@@ -51,10 +51,10 @@ export default function InfoForm({ onNextPanel }: Props): JSX.Element {
             type="phone"
             placeholder="e.g. +1 234 567 890"
             id="input-phone"
-            className="p-3 rounded-lg border border-gray-300 outline-blue-800 font-medium"
+            className="p-3 rounded-lg border border-gray-300 outline-blue-800 font-medium placeholder:font-normal"
           />
         </div>
-        <div className="flex justify-end mt-20">
+        <div className="flex justify-end mt-10">
           <NextButton />
         </div>
       </form>
