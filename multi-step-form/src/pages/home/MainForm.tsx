@@ -86,11 +86,13 @@ export default function MainForm({
 
   return (
     <>
-      <div className="flex justify-between flex-col w-full px-20 pb-7 pt-10">
-        <form className="flex flex-col gap-7" onSubmit={handleSubmitForm}>
-          {content}
+      <div className="flex justify-center flex-col w-full px-20 pb-7 pt-10 h-[95%]">
+        <form onSubmit={handleSubmitForm}>
+          <div className="flex flex-col gap-7 justify-between">
+            <div>{content}</div>
+            <div>{pagination}</div>
+          </div>
         </form>
-        {pagination}
       </div>
     </>
   );
