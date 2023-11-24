@@ -6,7 +6,7 @@ export default function GoBackButton({ onSwitchPanel }: Props): JSX.Element {
   return (
     <a
       onClick={onSwitchPanel}
-      className="text-gray-500 text-lg active:translate-y-0.5 transition-all duration-300"
+      className="text-gray-500 text-lg active:translate-y-0.5 transition-all duration-300 hover:-translate-y-1 cursor-pointer"
     >
       Go Back
     </a>

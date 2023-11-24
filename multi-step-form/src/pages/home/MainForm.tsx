@@ -44,7 +44,7 @@ export default function MainForm({
       </>
     );
     pagination = (
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <GoBackButton onSwitchPanel={() => handleNavigate(PLAN_ROUTE)} />
         <NextButton onSwitchPanel={() => handleNavigate(SUMMARY_ROUTE)} />
       </div>
@@ -56,7 +56,7 @@ export default function MainForm({
       </>
     );
     pagination = (
-      <div className="flex justify-end mt-10">
+      <div className="flex justify-end mt-10 items-center">
         <NextButton onSwitchPanel={() => handleNavigate(PLAN_ROUTE)} />
       </div>
     );
@@ -67,7 +67,7 @@ export default function MainForm({
       </>
     );
     pagination = (
-      <div className="flex justify-between">
+      <div className="flex justify-between items-center">
         <GoBackButton onSwitchPanel={() => handleNavigate(INFO_ROUTE)} />
         <NextButton onSwitchPanel={() => handleNavigate(ADD_ONS_ROUTE)} />
       </div>
