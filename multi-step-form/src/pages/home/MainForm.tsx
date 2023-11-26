@@ -1,3 +1,5 @@
+import { useState } from "react";
+
 import AddOnsForm from "../forms/AddOnsForm";
 import InfoForm from "../forms/InfoForm";
 import PlanForm from "../forms/PlanForm";
@@ -15,6 +17,7 @@ import {
   PLAN_ROUTE,
   SUMMARY_ROUTE,
 } from "../../variables/Routes";
+import ThankYouPage from "../forms/ThankYouPage";
 
 interface Props {
   activePanel: string;
@@ -28,6 +31,8 @@ export default function MainForm({
   let content;
   let pagination;
 
+  const [isPaid, setIsPaid] = useState<boolean>(false);
+
   const handleNavigate = (panel: string) => {
     navigateTo(panel);
   };
@@ -35,6 +40,7 @@ export default function MainForm({
   const handleSubmitForm = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Submitted");
+    setIsPaid(true);
   };
 
   if (activePanel === ADD_ONS_ROUTE) {
@@ -67,16 +73,16 @@ export default function MainForm({
       </>
     );
     pagination = (
-      <div className="flex justify-between items-center">
+      <div className="flex justify-between items-center ">
         <GoBackButton onSwitchPanel={() => handleNavigate(INFO_ROUTE)} />
         <NextButton onSwitchPanel={() => handleNavigate(ADD_ONS_ROUTE)} />
       </div>
     );
   } else if (activePanel === SUMMARY_ROUTE) {
     content = (
-      <div className="flex flex-col">
-        <Summary />
-        <div className="flex justify-between mt-20">
+      <div className="flex flex-col gap-8">
+        <Summary onSwitchPanel={() => handleNavigate(PLAN_ROUTE)} />
+        <div className="flex justify-between mt-10 items-center">
           <GoBackButton onSwitchPanel={() => handleNavigate(ADD_ONS_ROUTE)} />
           <SubmitButton />
         </div>
@@ -86,14 +92,18 @@ export default function MainForm({
 
   return (
     <>
-      <div className="flex justify-center flex-col w-full px-20 pb-7 pt-10 h-[95%]">
-        <form onSubmit={handleSubmitForm}>
-          <div className="flex flex-col gap-7 justify-between">
-            <div>{content}</div>
-            <div>{pagination}</div>
-          </div>
-        </form>
-      </div>
+      {isPaid ? (
+        <ThankYouPage />
+      ) : (
+        <div className="flex justify-center flex-col w-full px-20 pb-7 pt-10 h-[95%]">
+          <form onSubmit={handleSubmitForm}>
+            <div className="flex flex-col justify-between">
+              <div>{content}</div>
+              <div>{pagination}</div>
+            </div>
+          </form>
+        </div>
+      )}
     </>
   );
 }
