@@ -6,7 +6,6 @@ import PlanForm from "../forms/PlanForm";
 import Summary from "../forms/Summary";
 
 import GoBackButton from "../../components/button/GoBackButton";
-import NextButton from "../../components/button/NextButton";
 import SubmitButton from "../../components/button/SubmitButton";
 
 import { MouseEvent } from "react";
@@ -18,6 +17,10 @@ import {
   SUMMARY_ROUTE,
 } from "../../variables/Routes";
 import ThankYouPage from "../forms/ThankYouPage";
+import { useDispatch } from "react-redux";
+
+import { User, Plan, AddOn } from "../../redux/features/data.type";
+import { dataActions } from "../../redux/features/data.slice";
 
 interface Props {
   activePanel: string;
@@ -29,9 +32,22 @@ export default function MainForm({
   navigateTo,
 }: Props): JSX.Element {
   let content;
-  let pagination;
 
   const [isPaid, setIsPaid] = useState<boolean>(false);
+
+  const dispatch = useDispatch();
+
+  const handleUserInfoSubmit = (userData: User) => {
+    dispatch(dataActions.setUserData(userData));
+  };
+
+  const handlePlanInfoSubmit = (planData: Plan) => {
+    dispatch(dataActions.setPlanData(planData));
+  };
+
+  const onhandleAddOnsSubmit = (addOns: AddOn[]) => {
+    dispatch(dataActions.setAddOns(addOns));
+  };
 
   const handleNavigate = (panel: string) => {
     navigateTo(panel);
@@ -46,37 +62,31 @@ export default function MainForm({
   if (activePanel === ADD_ONS_ROUTE) {
     content = (
       <>
-        <AddOnsForm />
+        <AddOnsForm
+          onSwitchPanel={() => handleNavigate(SUMMARY_ROUTE)}
+          onSwitchPanelBack={() => handleNavigate(PLAN_ROUTE)}
+          onhandleAddOnsSubmit={onhandleAddOnsSubmit}
+        />
       </>
-    );
-    pagination = (
-      <div className="flex justify-between items-center">
-        <GoBackButton onSwitchPanel={() => handleNavigate(PLAN_ROUTE)} />
-        <NextButton onSwitchPanel={() => handleNavigate(SUMMARY_ROUTE)} />
-      </div>
     );
   } else if (activePanel === INFO_ROUTE) {
     content = (
       <>
-        <InfoForm />
+        <InfoForm
+          onSwitchPanel={() => handleNavigate(PLAN_ROUTE)}
+          onhandleUserSubmit={handleUserInfoSubmit}
+        />
       </>
-    );
-    pagination = (
-      <div className="flex justify-end mt-10 items-center">
-        <NextButton onSwitchPanel={() => handleNavigate(PLAN_ROUTE)} />
-      </div>
     );
   } else if (activePanel === PLAN_ROUTE) {
     content = (
       <>
-        <PlanForm />
+        <PlanForm
+          onSwitchPanel={() => handleNavigate(ADD_ONS_ROUTE)}
+          onSwitchPanelBack={() => handleNavigate(INFO_ROUTE)}
+          onhandlePlanSubmit={handlePlanInfoSubmit}
+        />
       </>
-    );
-    pagination = (
-      <div className="flex justify-between items-center ">
-        <GoBackButton onSwitchPanel={() => handleNavigate(INFO_ROUTE)} />
-        <NextButton onSwitchPanel={() => handleNavigate(ADD_ONS_ROUTE)} />
-      </div>
     );
   } else if (activePanel === SUMMARY_ROUTE) {
     content = (
@@ -97,10 +107,7 @@ export default function MainForm({
       ) : (
         <div className="flex justify-center flex-col w-full px-20 pb-7 pt-10 h-[95%]">
           <form onSubmit={handleSubmitForm}>
-            <div className="flex flex-col justify-between">
-              <div>{content}</div>
-              <div>{pagination}</div>
-            </div>
+            <div className="flex flex-col justify-between">{content}</div>
           </form>
         </div>
       )}
