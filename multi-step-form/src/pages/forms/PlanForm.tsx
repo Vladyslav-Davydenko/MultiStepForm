@@ -24,6 +24,12 @@ export default function PlanForm({
   });
   const [isMonthly, setIsMonthly] = useState<boolean>(true);
 
+  const handleSubscriptionSwitch = () => {
+    setIsMonthly(!isMonthly);
+    if (isMonthly) setPlan({ ...plan, price: plan.price * 10 });
+    else setPlan({ ...plan, price: plan.price / 10 });
+  };
+
   return (
     <>
       <div className="text-blue-950 flex flex-col gap-10">
@@ -46,7 +52,7 @@ export default function PlanForm({
           >
             <div className="text-sm p-4">
               <p className="text-lg font-semibold">Arcade</p>
-              <p className="text-gray-400">{isMonthly ? "$9/mo" : "$90/mo"}</p>
+              <p className="text-gray-400">{isMonthly ? "$9/mo" : "$90/ye"}</p>
             </div>
           </div>
           <div
@@ -62,7 +68,7 @@ export default function PlanForm({
             <div className="text-sm p-4">
               <p className="text-lg font-semibold">Advanced</p>
               <p className="text-gray-400">
-                {isMonthly ? "$12/mo" : "$120/mo"}
+                {isMonthly ? "$12/mo" : "$120/ye"}
               </p>
             </div>
           </div>
@@ -79,7 +85,7 @@ export default function PlanForm({
             <div className="text-sm p-4">
               <p className="text-lg font-semibold">Pro</p>
               <p className="text-gray-400">
-                {isMonthly ? "$15/mo" : "$150/mo"}
+                {isMonthly ? "$15/mo" : "$150/ye"}
               </p>
             </div>
           </div>
@@ -101,7 +107,7 @@ export default function PlanForm({
               className="flex items-center cursor-pointer select-none"
             >
               <div
-                onClick={() => setIsMonthly(!isMonthly)}
+                onClick={handleSubscriptionSwitch}
                 className="w-11 h-6 bg-blue-950 rounded-full p-1 duration-300 ease-in-out relative"
               >
                 <div

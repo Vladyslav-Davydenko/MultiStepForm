@@ -17,10 +17,12 @@ import {
   SUMMARY_ROUTE,
 } from "../../variables/Routes";
 import ThankYouPage from "../forms/ThankYouPage";
-import { useDispatch } from "react-redux";
+import { useAppDispatch, useAppSelector } from "../../redux/app/redux.hooks";
 
 import { User, Plan, AddOn } from "../../redux/features/data.type";
 import { dataActions } from "../../redux/features/data.slice";
+
+import { selectDataState } from "../../redux/features/data.selector";
 
 interface Props {
   activePanel: string;
@@ -34,8 +36,9 @@ export default function MainForm({
   let content;
 
   const [isPaid, setIsPaid] = useState<boolean>(false);
+  const { user, plan, addOns } = useAppSelector(selectDataState);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const handleUserInfoSubmit = (userData: User) => {
     dispatch(dataActions.setUserData(userData));
@@ -56,6 +59,9 @@ export default function MainForm({
   const handleSubmitForm = (e: MouseEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("Submitted");
+    console.log(
+      `User: ${user.name}\nPlan: ${plan.name}\nAdd-ons: ${addOns.length}`
+    );
     setIsPaid(true);
   };
 

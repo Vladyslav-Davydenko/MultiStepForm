@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import clsx from "clsx";
 import { AddOn } from "../../redux/features/data.type";
 
@@ -16,10 +16,31 @@ export default function AddOnsForm({
   onSwitchPanelBack,
   onhandleAddOnsSubmit,
 }: Props): JSX.Element {
+  const [addOns, setAddOns] = useState<AddOn[]>([]);
+
   const [isOnlineService, setIsOnlineService] = useState<boolean>(false);
   const [isLargerStorage, setIsLargerStorage] = useState<boolean>(false);
   const [isCustomizableProfile, setIsCustomizableProfile] =
     useState<boolean>(false);
+
+  useEffect(() => {
+    if (
+      isOnlineService &&
+      !addOns.find((add) => add.name === "Online Service")
+    ) {
+      setAddOns([...addOns, { name: "Online Service", price: 1 }]);
+    } else if (
+      isLargerStorage &&
+      !addOns.find((add) => add.name === "Large Storage")
+    ) {
+      setAddOns([...addOns, { name: "Large Storage", price: 2 }]);
+    } else if (
+      isCustomizableProfile &&
+      !addOns.find((add) => add.name === "Cusromizable Profile")
+    ) {
+      setAddOns([...addOns, { name: "Cusromizable Profile", price: 2 }]);
+    }
+  }, [isOnlineService, isLargerStorage, isCustomizableProfile]);
 
   return (
     <>
@@ -46,6 +67,7 @@ export default function AddOnsForm({
                 name="online-service"
                 id="online-service"
                 className="w-[20px] h-[20px] checked:bg-blue-700"
+                readOnly
                 checked={isOnlineService}
               />
               <div className="text-md p-4">
@@ -70,6 +92,7 @@ export default function AddOnsForm({
                 name="online-service"
                 id="online-service"
                 className="w-[20px] h-[20px] checked:bg-blue-700"
+                readOnly
                 checked={isLargerStorage}
               />
               <div className="text-md p-4">
@@ -94,6 +117,7 @@ export default function AddOnsForm({
                 name="online-service"
                 id="online-service"
                 className="w-[20px] h-[20px] checked:bg-blue-700"
+                readOnly
                 checked={isCustomizableProfile}
               />
               <div className="text-md p-4">
@@ -109,7 +133,7 @@ export default function AddOnsForm({
         <GoBackButton onSwitchPanel={onSwitchPanelBack} />
         <NextButton
           onSwitchPanel={onSwitchPanel}
-          onClick={() => onhandleAddOnsSubmit([])}
+          onClick={() => onhandleAddOnsSubmit(addOns)}
         />
       </div>
     </>
