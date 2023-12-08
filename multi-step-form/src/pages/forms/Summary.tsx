@@ -1,6 +1,9 @@
 import { useAppSelector } from "../../redux/app/redux.hooks";
 
-import { selectDataState } from "../../redux/features/data.selector";
+import {
+  selectDataState,
+  selectTotalPrice,
+} from "../../redux/features/data.selector";
 
 interface Props {
   onSwitchPanel: () => void;
@@ -8,6 +11,7 @@ interface Props {
 
 export default function Summary({ onSwitchPanel }: Props): JSX.Element {
   const { plan, addOns } = useAppSelector(selectDataState);
+  const total = useAppSelector(selectTotalPrice);
   return (
     <div className="text-blue-950 flex flex-col gap-10">
       <div>
@@ -49,9 +53,11 @@ export default function Summary({ onSwitchPanel }: Props): JSX.Element {
           </div>
         </div>
         <div className="text-md flex justify-between items-center mt-6 px-6">
-          <p className="text-gray-400 font-semibold">Total (per month)</p>
+          <p className="text-gray-400 font-semibold">{`Total (per ${
+            plan.isMonthly ? "month" : "year"
+          })`}</p>
           <p className="text-violet-500 font-semibold text-xl tracking-wider">
-            +$12/mo
+            {`+$${total}/${plan.isMonthly ? "mo" : "ye"}`}
           </p>
         </div>
       </div>

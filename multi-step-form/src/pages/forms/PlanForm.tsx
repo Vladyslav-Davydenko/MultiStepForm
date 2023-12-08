@@ -22,12 +22,13 @@ export default function PlanForm({
     isMonthly: true,
     price: 9,
   });
-  const [isMonthly, setIsMonthly] = useState<boolean>(true);
 
   const handleSubscriptionSwitch = () => {
-    setIsMonthly(!isMonthly);
-    if (isMonthly) setPlan({ ...plan, price: plan.price * 10 });
-    else setPlan({ ...plan, price: plan.price / 10 });
+    console.log(plan);
+    if (plan.isMonthly)
+      setPlan({ ...plan, isMonthly: !plan.isMonthly, price: plan.price * 10 });
+    else
+      setPlan({ ...plan, isMonthly: !plan.isMonthly, price: plan.price / 10 });
   };
 
   return (
@@ -52,7 +53,9 @@ export default function PlanForm({
           >
             <div className="text-sm p-4">
               <p className="text-lg font-semibold">Arcade</p>
-              <p className="text-gray-400">{isMonthly ? "$9/mo" : "$90/ye"}</p>
+              <p className="text-gray-400">
+                {plan.isMonthly ? "$9/mo" : "$90/ye"}
+              </p>
             </div>
           </div>
           <div
@@ -68,7 +71,7 @@ export default function PlanForm({
             <div className="text-sm p-4">
               <p className="text-lg font-semibold">Advanced</p>
               <p className="text-gray-400">
-                {isMonthly ? "$12/mo" : "$120/ye"}
+                {plan.isMonthly ? "$12/mo" : "$120/ye"}
               </p>
             </div>
           </div>
@@ -85,7 +88,7 @@ export default function PlanForm({
             <div className="text-sm p-4">
               <p className="text-lg font-semibold">Pro</p>
               <p className="text-gray-400">
-                {isMonthly ? "$15/mo" : "$150/ye"}
+                {plan.isMonthly ? "$15/mo" : "$150/ye"}
               </p>
             </div>
           </div>
@@ -93,7 +96,7 @@ export default function PlanForm({
         <div className="bg-blue-50 flex justify-center gap-5 py-3 rounded-lg font-semibold mb-16">
           <p
             className={
-              isMonthly
+              plan.isMonthly
                 ? "text-blue-950 transition-all duration-300"
                 : "text-gray-300 transition-all duration-300"
             }
@@ -114,8 +117,8 @@ export default function PlanForm({
                   className={clsx({
                     "dot absolute w-4 h-4 bg-white rounded-full shadow-md transform transition-all duration-300 ease-in-out":
                       true,
-                    "translate-x-0": isMonthly,
-                    "translate-x-5": !isMonthly,
+                    "translate-x-0": plan.isMonthly,
+                    "translate-x-5": !plan.isMonthly,
                   })}
                 ></div>
               </div>
@@ -126,7 +129,7 @@ export default function PlanForm({
           </div>
           <p
             className={
-              isMonthly
+              plan.isMonthly
                 ? "text-gray-300 transition-all duration-300"
                 : "text-blue-950 transition-all duration-300"
             }
