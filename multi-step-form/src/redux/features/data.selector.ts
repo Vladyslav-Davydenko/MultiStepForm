@@ -10,7 +10,7 @@ export const selectTotalPrice = createSelector(
     let price = 0;
     price += data.plan.price;
     price += data.addOns.reduce((total, addOn) => {
-      return (total += addOn.price);
+      return (total += addOn.price * 12);
     }, 0);
     return price;
   }
